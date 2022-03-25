@@ -1,0 +1,364 @@
+<script>
+    /*const _tableList =
+        "<table id='tableList'>" +
+        "<thead>" +
+        "    <tr>" +
+        "       <th>code</th>" +
+        "		<th>title</th>" +
+        "		<th>type</th>" +
+        "		<th>status</th>" +
+        "       <th>dateStart</th>" +
+        "       <th>dateEnd</th>" +
+        "	</tr>" +
+        "</thead>" +
+        "<tbody>" +
+        "{bodys}" +
+        "</tbody>" +
+        "</table>";
+    const _tableItem =
+        "    <tr>" +
+        "       <td>{code}</td>" +
+        "		<td>{title}</td>" +
+        "		<td>{type}</td>" +
+        "		<td>{status}</td>" +
+        "		<td>{dateStart}</td>" +
+        "		<td>{dateEnd}</td>" +
+        "	</tr>";
+            */
+    const _tableList =
+        "<table id='tableList' style='cursor: pointer; margin-top: 80px; position: absolute;' class='table table-striped pe-auto table-bordered table-condensed table-hover'>" +
+        "    <thead>" +
+        "        <tr>" +
+        "            <th>Código</th>" +
+        "            <th>Titulo</th>" +
+        "            <th>Tipo</th>" +
+        "            <th>Status</th>" +
+        "            <th>Data Inicial</th>" +
+        "            <th>Data Final</th>" +
+        "        </tr>" +
+        "    </thead>" +
+        "    <tbody>" +
+        "{bodys}" +
+        "    </tbody>" +
+        "</table>";
+    const _tableItem =
+        "<tr>" +
+        "    <td>{code}</td>" +
+        "    <td>{title}</td>" +
+        "    <td>{type}</td>" +
+        "    <td>{status}</td>" +
+        "    <td>{dateStart}</td>" +
+        "    <td>{dateEnd}</td>" +
+        "</tr>";
+    /*const url_base = 'http://localhost:3001/v1/campaign';
+    
+    function listar() {
+        fetch(`${url_base}/`)
+            .then(response => response.json())
+            .then(result => {
+                carregarLista(result);
+            })
+    }
+    function carregarItem(response) {
+        idCampaign = response.campaign._id
+        document.getElementById("inputTitle").value = response.campaign.title
+    }
+    function buscar() {
+        const titleInput = document.getElementById('inputTitle').value
+        fetch(`${url_base}/find/${titleInput}`)
+            .then(response => response.json())
+            .then(result => {
+                carregarItem(result);
+            })
+    }
+    function fazGet(url) {
+        let request = new XMLHttpRequest()
+        request.open("GET", url, false)
+        request.send()
+        return request.responseText
+    }
+    function fazPost(url, body) {
+        console.log("body=", body)
+        let request = new XMLHttpRequest()
+        request.open("POST", url, true)
+        request.setRequestHeader("Content-type", "application/json")
+        request.send(JSON.stringify(body))
+        request.onload = function () {
+            console.log(this.responseText)
+        }
+        return request.responseText
+    }
+    function excluir () {
+        console.log('excluir')
+        if (!idCampaign){
+            return;
+        }
+        var 
+    }
+    function cadastraEvento() {
+        event.preventDefault()
+        let url = "http://localhost:3001/v1/campaign/"
+        let title = document.getElementById("inputTitle").value
+        let type = document.getElementById("inputType").value
+        let status = document.getElementById("inputStatus").value
+        let dateStart = document.getElementById("inputdateStart").value
+        let dateEnd = document.getElementById("inputdateEnd").value
+        let pageHtml = document.getElementById("inputpageHtml").value
+        let emailToSend = document.getElementById("emailToSend").value
+        let host = document.getElementById("inputHost").value
+        let port = document.getElementById("inputPort").value
+        let name = document.getElementById("inputName").value
+        let email = document.getElementById("inputEmail").value
+        let user = document.getElementById("inputUser").value
+        let pass = document.getElementById("inputPass").value
+        console.log(title)
+        body = {
+            "title": title,
+            "type": type,
+            "status": status,
+            "date_start": dateStart,
+            "date_end": dateEnd,
+            "pageHtml": pageHtml,
+            "emailToSend": emailToSend,
+            "smtp": {
+                "host": host,
+                "port": port,
+                "name": name,
+                "email": email,
+                "user": user,
+                "pass": pass
+            }
+        }
+        fazPost(url, body)
+    }
+    function carregarLista(request) {
+        var conteudoItems = "";
+        console.log(request)
+        request.campaign.map(item => {
+            var tableItem = _tableItem
+                .replace("{title}", item.title)
+                .replace("{type}", item.type)
+                .replace("{status}", item.status)
+                .replace("{dateStart}", item.date_start)
+                .replace("{dateEnd}", item.date_end);
+            conteudoItems += tableItem;
+        });
+        var tableList = _tableList
+            .replace("{items}", conteudoItems);
+        var listaItem = document.getElementById("listaItem");
+        listaItem.innerHTML = tableList;
+    }
+    var tabela = document.getElementById("allTable");
+    var linhas = tabela.getElementsByTagName("tr");
+    for (var i = 0; i < linhas.length; i++) {
+        var linha = linhas[i];
+        linha.addEventListener("click", function () {
+            //Adicionar ao atual
+            selLinha(this, false); //Selecione apenas um
+            //selLinha(this, true); //Selecione quantos quiser
+        });
+    }*/
+    const urlBase = "http://localhost:3005/v1/campaign"
+    let idCampaign = undefined;
+    function pegarModel() {
+        var model = {
+            code: document.getElementById("inputCode").value,
+            title: document.getElementById("inputTitle").value,
+            type: document.getElementById("inputType").value,
+            dateStart: document.getElementById("inputDateStart").value,
+            dateEnd: document.getElementById("inputDateEnd").value,
+            status: document.getElementById("inputStatus").value,
+            pageHtml: stringToBase64(document.getElementById("inputPageHtml").value),
+            emailToSend: stringToBase64(document.getElementById("inputEmailToSend").value),
+            smtp: {
+                host: document.getElementById("inputHost").value,
+                port: document.getElementById("inputPort").value,
+                name: document.getElementById("inputName").value,
+                email: document.getElementById("inputEmail").value,
+                user: document.getElementById("inputUser").value,
+                pass: document.getElementById("inputPass").value
+            }
+        }
+        return model;
+    }
+    function setarModel(model) {
+        console.log(model);
+        idCampaign = model ? model._id : undefined;
+        document.getElementById("inputCode").value = model ? model.code : "";
+        document.getElementById("inputTitle").value = model ? model.title : "";
+        document.getElementById("inputType").value = model ? model.type : "";
+        document.getElementById("inputDateStart").value = model ? model.dateStart : "";
+        document.getElementById("inputDateEnd").value = model ? model.dateEnd : "";
+        document.getElementById("inputStatus").value = model ? model.status : "";
+        document.getElementById("inputPageHtml").value = model ? base64ToString(model.pageHtml) : "";
+        document.getElementById("inputEmailToSend").value = model ? base64ToString(model.emailToSend) : "";
+        document.getElementById("inputHost").value = model ? model.smtp.host : "";
+        document.getElementById("inputPort").value = model ? model.smtp.port : "";
+        document.getElementById("inputName").value = model ? model.smtp.name : "";
+        document.getElementById("inputEmail").value = model ? model.smtp.email : "";
+        document.getElementById("inputUser").value = model ? model.smtp.user : "";
+        document.getElementById("inputPass").value = model ? model.smtp.pass : "";
+        return model;
+    }
+    function limpar() {
+        console.log('limpar')
+        setarModel(null);
+        document.getElementById("divList").innerHTML = "";
+    }
+    function listar() {
+        console.log('listar')
+        var node = `/`
+        execRequest("GET", node, null, (json) => {
+            var objCampaign = JSON.parse(json)
+            console.log(objCampaign)
+            carregarLista(objCampaign.campaign)
+        })
+    }
+    function carregarLista(campaigns) {
+        var tableItems = "";
+        console.log(campaigns)
+        campaigns?.map(campaign => {
+            var tableItem = _tableItem
+                .replace("{code}", campaign.code)
+                .replace("{title}", campaign.title)
+                .replace("{type}", campaign.type)
+                .replace("{dateStart}", campaign.dateStart)
+                .replace("{dateEnd}", campaign.dateEnd)
+                .replace("{status}", campaign.status);
+            tableItems += tableItem;
+        })
+        var tableList = _tableList
+            .replace("{bodys}", tableItems);
+        document.getElementById("divList").innerHTML = tableList;
+        if (tableList) {
+            setarListaClick()
+        }
+    }
+    function stringToBase64(value) {
+        var result = btoa(value)
+        console.log(result)
+        return result;
+    }
+    function base64ToString(value) {
+        var result = atob(value)
+        console.log(result)
+        return result;
+    }
+
+    /*function convTituloMaiusculo(){
+        var palavra = 'ola';
+        console.log(palavra.toUpperCase());
+        return palavra;
+    }*/
+
+    /*function convToUpper(value){
+        var str = document.getElementById(value);
+        console.log(str.toUpperCase);
+        return str;
+    }*/
+
+    function pegaValor(value) {
+        var resultado = document.getElementById("inputTitle").value;
+
+        return resultado.toUpperCase();
+
+    }
+
+    function buscar() {
+        console.log('buscar')
+        var title = document.getElementById("inputTitle").value;
+        var code = document.getElementById("inputCode").value;
+        var status = document.getElementById("inputStatus").value;
+        if (!title && !status) {
+            var node = `/searchby/${code}`
+            execRequest("GET", node, null, (json) => {
+                var objCampaign = JSON.parse(json)
+                console.log(objCampaign)
+                objCampaign?.campaign?.map(item => {
+                    setarModel(item)
+                })
+            })
+            return
+        } else if (!title && !code) {
+            var node = `/search/${status}`
+            execRequest("GET", node, null, (json) => {
+                var objCampaign = JSON.parse(json)
+                console.log(objCampaign)
+                objCampaign?.campaign?.map(item => {
+                    setarModel(item)
+                })
+            })
+            return
+        }
+        var node = `/find/${title.replace(" ", "%20")}`
+        execRequest("GET", node, null, (json) => {
+            var objCampaign = JSON.parse(json)
+            console.log(objCampaign)
+            objCampaign?.campaign?.map(item => {
+                setarModel(item)
+            })
+        })
+    }
+
+    function salvar() {
+        console.log('salvar')
+        var rest = idCampaign ? "PUT" : "POST";
+        var node = idCampaign ? `/${idCampaign}` : "";
+        var model = pegarModel()
+        execRequest(rest, node, model, (json) => {
+            alert('gravação efetuada com sucesso');
+        })
+    }
+    function excluir() {
+        console.log('excluir')
+        if (!idCampaign) {
+            return;
+        }
+        var node = `/${idCampaign}`;
+        execRequest("DELETE", node, null, (json) => {
+            alert('exclusao efetuada com sucesso')
+        })
+    }
+    function GetCellValues(rowIndex, colIndex) {
+        var table = document.getElementById('tableList');
+        for (var r = 0, n = table.rows.length; r < n; r++) {
+            for (var c = 0, m = table.rows[r].cells.length; c < m; c++) {
+                if (r == rowIndex && c == colIndex) {
+                    return table.rows[r].cells[c].innerHTML;
+                }
+            }
+        }
+    }
+    function execRequest(rest, node, data, action) {
+        var site = `${urlBase}${node}`;
+        console.log(`${rest} - ${site}`);
+        const request = new XMLHttpRequest()
+        request.open(rest, site)
+        if (data) {
+            console.log("data ->");
+            console.log(data);
+            request.setRequestHeader("Content-type", "application/json")
+            request.send(JSON.stringify(data))
+        }
+        else {
+            request.send()
+        }
+        request.onload = function () {
+            console.log(this.responseText)
+            action(this.responseText)
+        }
+    }
+    function setarListaClick() {
+        if (!document.getElementsByTagName || !document.createTextNode)
+            return;
+        var rows = document.getElementById('tableList')
+            .getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+        for (i = 0; i < rows.length; i++) {
+            rows[i].onclick = function () {
+                var campaign = GetCellValues(this.rowIndex, 1)
+                document.getElementById('inputTitle').value = campaign
+                buscar()
+            }
+        }
+    }
+</script>

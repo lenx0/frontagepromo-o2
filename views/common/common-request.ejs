@@ -1,0 +1,61 @@
+<script>
+    const urlBase = "http://localhost:5004";
+
+</script>
+
+<script>
+    function requestSend(rest, base, node, data, func) {
+
+        const urlRequest = `${base}/${node}`;
+
+        //console.log(`urlRequest ${urlRequest}`);
+        
+
+        const token = window.sessionStorage.getItem("token");
+        
+        const http = new XMLHttpRequest();
+        
+        http.open(rest, urlRequest);
+        
+        if (data) {
+            http.setRequestHeader('Content-type', 'application/json');
+            
+        }
+
+        if (token) {
+            http.setRequestHeader('Authorization', `Bearer ${token}`);
+            
+        }
+
+        if (data) {
+            http.send(JSON.stringify(data));
+        }
+        else {
+            http.send();
+        }
+
+        http.onload = function () {
+            //bug here
+            console.log(http.responseText);
+            func(http.responseText);
+            
+            
+        }
+    }
+
+    function requestGet(base, node, data, func) {
+        return requestSend("GET", base, node, data, func);
+    }
+
+    function requestPost(base, node, data, func) {
+        return requestSend("POST", base, node, data, func);
+    }
+
+    function requestPut(base, node, data, func) {
+        return requestSend("PUT", base, node, data, func);
+    }
+
+    function requestDelete(base, node, data, func) {
+        return requestSend("DELETE", base, node, data, func);
+    }
+</script>

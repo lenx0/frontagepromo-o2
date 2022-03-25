@@ -1,0 +1,113 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap" rel="stylesheet">
+
+<header>
+</header>
+<main>
+    <div class="return-login-button">
+        <button onclick="window.location.href='http://localhost:5004/login';" type="button" class="btn btn-primary">Voltar</button>
+    </div>
+    <div class="title-container">
+        <img src="https://altogirolabs.s3.us-east-2.amazonaws.com/agcode/assets/images/site/logo-commerce.png"
+            width="180" height="35" />
+        <h2 style="font-size: 50;  font-weight: bold">CAMPANHA</h2>
+    </div>
+    <form class="form-container">
+        <div class="form-group">
+            <label id="label">Código</label>
+            <input type="text" class="form-control inputCode" id="inputCode" placeholder="Código">
+        </div>
+        
+        <div class="form-group">
+            <label id="label">Título</label>
+            <input type="text" class="form-control" id="inputTitle" placeholder="Insira o título">
+        </div>
+        <div class="form-row-type">
+            <label id="label">Tipo</label>
+            <select id="inputType" class="form-control" style="cursor: pointer">
+                <option selected="">Escolher...</option>
+                <option>Campanha</option>
+                <option>Promoção</option>
+            </select>
+            <label id="label">Status</label>
+            <select id="inputStatus" class="form-control" style="cursor: pointer">
+                <option selected="">Escolher...</option>
+                <option>Ativo</option>
+                <option>Inativo</option>
+            </select>
+        </div>
+        </div>
+        <div class="form-group">
+            <label id="label">Início</label><br>
+            <input id="inputDateStart" type="datetime-local" style="cursor: pointer">
+        </div>
+        <div class="form-group">
+            <label id="label">Termino</label><br>
+            <input id="inputDateEnd" type="datetime-local" style="cursor: pointer">
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label id="label">Host</label>
+                <input type="text" class="form-control" id="inputHost" placeholder="smtp.office365.com">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label id="label">Porta</label>
+                <input type="text" class="form-control" id="inputPort" placeholder="Insira a porta">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label id="label">Nome</label>
+                <input type="text" class="form-control" id="inputName" placeholder="Insira o nome">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label id="label">Email</label>
+                <input type="email" class="form-control" id="inputEmail" placeholder="email@example.com">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label id="label">Usuário</label>
+                <input type="text" class="form-control" id="inputUser" placeholder="user@example.com">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label id="label">Senha</label>
+                <input type="text" class="form-control" id="inputPass" placeholder="Senha">
+            </div>
+        </div>
+    </form>
+    <div class="form-group-box">
+        <label id="label-box">Conteúdo da página</label><br>
+        <textarea class="inputToSend" id="inputPageHtml" name="inputPageHtml" rows="7" cols="60">
+    </textarea>
+    </div>
+    <div class="form-group-box">
+        <label id="label-box">Lista de Emails</label><br>
+        <textarea class="inputToSend" id="inputEmailToSend" name="inputEmailToSend" rows="7" cols="60">
+    </textarea>
+    </div>
+    <div id="divList">
+    </div>
+    <div class="form-group-buttons">
+        <div class="button-container">
+            <button onclick="limpar(), listar()" type="button" class="btn btn-primary">Limpar</button>
+            <button onclick="buscar()" type="button" class="btn btn-primary">Buscar</button>
+            <button onclick="salvar()" type="button" class="btn btn-primary">Salvar</button>
+            <button onclick="listar()" type="button" class="btn btn-primary">Listar</button>
+            <button onclick="excluir()" type="button" class="btn btn-danger">Excluir</button>
+        </div>
+    </div>
+</main>
+<script>
+    function submitSucessAlert() {
+        alert("Sucess!!!")
+    }
+    listar()
+</script>
