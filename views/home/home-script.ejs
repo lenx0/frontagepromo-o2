@@ -158,7 +158,8 @@
             //selLinha(this, true); //Selecione quantos quiser
         });
     }*/
-    const urlBase = "http://localhost:3005/v1/campaign"
+    //const urlBase = "http://localhost:3005/v1/campaign"
+    const urlBase = "http://192.168.255.141:3005/v1/campaign"
     let idCampaign = undefined;
     function pegarModel() {
         var model = {
@@ -214,6 +215,7 @@
             carregarLista(objCampaign.campaign)
         })
     }
+
     function carregarLista(campaigns) {
         var tableItems = "";
         console.log(campaigns)
@@ -271,6 +273,7 @@
         var status = document.getElementById("inputStatus").value;
         if (!title && !status) {
             var node = `/searchby/${code}`
+
             execRequest("GET", node, null, (json) => {
                 var objCampaign = JSON.parse(json)
                 console.log(objCampaign)
@@ -361,4 +364,46 @@
             }
         }
     }
+
+    function somenteNumeros(number) {
+
+        // Only ASCII character in that range allowed
+        var ASCIICode = (number.which) ? number.which : number.keyCode
+        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+            return false;
+        return true;
+    }
+
+    function checkInputs(inputs) {
+
+        var filled = true;
+
+        inputs.forEach(function (input) {
+
+            if (input.value === "") {
+                filled = false;
+            }
+
+        });
+
+        return filled;
+
+    }
+
+    var inputs = document.querySelectorAll("form-group");
+    var button = document.querySelector("salvar");
+
+    inputs.forEach(function (input) {
+
+        input.addEventListener("keyup", function () {
+
+            if (checkInputs(inputs)) {
+                button.disabled = false;
+            } else {
+                button.disabled = true;
+            }
+
+        });
+
+    });
 </script>
