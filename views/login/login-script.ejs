@@ -16,9 +16,9 @@
     function execLogin() {
 
         const objLogin = pegarLogin();
-
+        console.log(objLogin);
         requestPost(urlBase, "login", objLogin, (json) => {
-
+            console.log(requestPost);
             execLoginResult(json);
         });
     }
@@ -26,7 +26,6 @@
     function execLoginResult(json) {
 
         const objLoginResult = JSON.parse(json);
-
 
         if (objLoginResult.message) {
             alert(objLoginResult.message);

@@ -14,6 +14,8 @@ const router = express.Router();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+
+
 // Estáticas
 app.use(express.static(path.join(__dirname, 'public')));
 
