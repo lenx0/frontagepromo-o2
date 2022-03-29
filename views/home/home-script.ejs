@@ -251,20 +251,20 @@
         var palavra = 'ola';
         console.log(palavra.toUpperCase());
         return palavra;
-    }*/
+    }
 
     /*function convToUpper(value){
         var str = document.getElementById(value);
         console.log(str.toUpperCase);
         return str;
-    }*/
+    }
 
-    function pegaValor(value) {
+    /*function pegaValor(value) {
         var resultado = document.getElementById("inputTitle").value;
 
         return resultado.toUpperCase();
 
-    }
+    }*/
 
     function buscar() {
         console.log('buscar')
@@ -365,45 +365,4 @@
         }
     }
 
-    function somenteNumeros(number) {
-
-        // Only ASCII character in that range allowed
-        var ASCIICode = (number.which) ? number.which : number.keyCode
-        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
-            return false;
-        return true;
-    }
-
-    function checkInputs(inputs) {
-
-        var filled = true;
-
-        inputs.forEach(function (input) {
-
-            if (input.value === "") {
-                filled = false;
-            }
-
-        });
-
-        return filled;
-
-    }
-
-    var inputs = document.querySelectorAll("form-group");
-    var button = document.querySelector("salvar");
-
-    inputs.forEach(function (input) {
-
-        input.addEventListener("keyup", function () {
-
-            if (checkInputs(inputs)) {
-                button.disabled = false;
-            } else {
-                button.disabled = true;
-            }
-
-        });
-
-    });
 </script>
